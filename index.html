@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Mania</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Image/favicon2.ico">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script> location.hash = (location.hash) ? location.hash : " "; </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="container-fluid">
+
+                <nav class="navbar navbar-expand-lg navbar-light navigationBar">
+                    <a class="navbar-brand animate__animated animate__heartBeat animate__slow animate__infinite	" href="#"> <img class="brandLogo" src="Image/logo.png" alt=""> Sudoku Mania</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse dropDownCentre" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link contact" href="mailto:roynilarghya2001@gmail.com"
+                                    target="_blank">Contact Me</a>
+                                <!-- target="_blank" is for opening the link in a new tab -->
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link login" target="_blank"> Log In &nbsp; <img class="user"
+                                        src="Image/user.png" alt="user"> </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </nav>
+            </div>
+        </div>
+
+        <div class="body">
+            
+            <div class="problem">
+                <div class="row first-row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col1">
+                            
+                            <p>Hello, User;</p>
+                            <p>Before Starting the game, set the difficulty and read the rule.</p>
+                            <p><strong>Difficulty:</strong> Number of UN-FILLED grid: &nbsp;
+                                <input type="number" autocomplete="off" class="unfilled-grid" id="myInput" oninput="myFunction()"> <a href="#GameCanvas" class="start">Start</a></p>
+
+                            <h4 class="rule-heading">RULE</h4>
+                            <p class="rule-Info"> As you can clearly see that the 9x9 sudoku board can be divided into
+                                nine 3x3 region called blocks. Fill in the numbers 1-9 exactly once in every row, column,
+                                and 3x3 region (also called blocks). <br> <br> Abiding the above condition, fill each of
+                                the unfilled grid. Once all the grids are filled, click on <strong>"Check"</strong> to
+                                verify your solution.</p>
+                            <p class="rule-Info"> Get stuck? Click on <strong>"Reveal"</strong> to see the
+                                solution. </p>
+                            <a href="#message" class="check"> Check</a> <a class="reveal1" href="#solution">Reveal</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12" id="GameCanvas">
+                        <div class="row rowSec0">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <img src="Image/audio_ON.png" class="audioLogo" alt="">
+                                <br>
+                                <p class="time">Time Elapsed: 0 Sec</p>
+                                <p class="wAttempt">Wrong Attempts: 0</p>
+                            </div>
+                        </div>
+                        <div class="row rowSec1">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="board">
+                                    <div class="col2">
+
+                                        <div class="block">
+                                            <div class="item" id="item0">0</div>
+                                            <div class="item" id="item1">0</div>
+                                            <div class="item" id="item2">0</div>
+                                            <div class="item" id="item9">0</div>
+                                            <div class="item" id="item10">0</div>
+                                            <div class="item" id="item11">0</div>
+                                            <div class="item" id="item18">0</div>
+                                            <div class="item" id="item19">0</div>
+                                            <div class="item" id="item20">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item3">0</div>
+                                            <div class="item" id="item4">0</div>
+                                            <div class="item" id="item5">0</div>
+                                            <div class="item" id="item12">0</div>
+                                            <div class="item" id="item13">0</div>
+                                            <div class="item" id="item14">0</div>
+                                            <div class="item" id="item21">0</div>
+                                            <div class="item" id="item22">0</div>
+                                            <div class="item" id="item23">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item6">0</div>
+                                            <div class="item" id="item7">0</div>
+                                            <div class="item" id="item8">0</div>
+                                            <div class="item" id="item15">0</div>
+                                            <div class="item" id="item16">0</div>
+                                            <div class="item" id="item17">0</div>
+                                            <div class="item" id="item24">0</div>
+                                            <div class="item" id="item25">0</div>
+                                            <div class="item" id="item26">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item27">0</div>
+                                            <div class="item" id="item28">0</div>
+                                            <div class="item" id="item29">0</div>
+                                            <div class="item" id="item36">0</div>
+                                            <div class="item" id="item37">0</div>
+                                            <div class="item" id="item38">0</div>
+                                            <div class="item" id="item45">0</div>
+                                            <div class="item" id="item46">0</div>
+                                            <div class="item" id="item47">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item30">0</div>
+                                            <div class="item" id="item31">0</div>
+                                            <div class="item" id="item32">0</div>
+                                            <div class="item" id="item39">0</div>
+                                            <div class="item" id="item40">0</div>
+                                            <div class="item" id="item41">0</div>
+                                            <div class="item" id="item48">0</div>
+                                            <div class="item" id="item49">0</div>
+                                            <div class="item" id="item50">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item33">0</div>
+                                            <div class="item" id="item34">0</div>
+                                            <div class="item" id="item35">0</div>
+                                            <div class="item" id="item42">0</div>
+                                            <div class="item" id="item43">0</div>
+                                            <div class="item" id="item44">0</div>
+                                            <div class="item" id="item51">0</div>
+                                            <div class="item" id="item52">0</div>
+                                            <div class="item" id="item53">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item54">0</div>
+                                            <div class="item" id="item55">0</div>
+                                            <div class="item" id="item56">0</div>
+                                            <div class="item" id="item63">0</div>
+                                            <div class="item" id="item64">0</div>
+                                            <div class="item" id="item65">0</div>
+                                            <div class="item" id="item72">0</div>
+                                            <div class="item" id="item73">0</div>
+                                            <div class="item" id="item74">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item57">0</div>
+                                            <div class="item" id="item58">0</div>
+                                            <div class="item" id="item59">0</div>
+                                            <div class="item" id="item66">0</div>
+                                            <div class="item" id="item67">0</div>
+                                            <div class="item" id="item68">0</div>
+                                            <div class="item" id="item75">0</div>
+                                            <div class="item" id="item76">0</div>
+                                            <div class="item" id="item77">0</div>
+                                        </div>
+                                        <div class="block">
+                                            <div class="item" id="item60">0</div>
+                                            <div class="item" id="item61">0</div>
+                                            <div class="item" id="item62">0</div>
+                                            <div class="item" id="item69">0</div>
+                                            <div class="item" id="item70">0</div>
+                                            <div class="item" id="item71">0</div>
+                                            <div class="item" id="item78">0</div>
+                                            <div class="item" id="item79">0</div>
+                                            <div class="item" id="item80">0</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row rowSec2">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="numCanvas">
+
+                                    <div class="numMobile">
+                                        <div class="num" id="num1">1</div>
+                                        <div class="num" id="num2">2</div>
+                                        <div class="num" id="num3">3</div>
+                                        <div class="num" id="num4">4</div>
+                                        <div class="num" id="num5">5</div>
+                                        <div class="num" id="num6">6</div>
+                                        <div class="num" id="num7">7</div>
+                                        <div class="num" id="num8">8</div>
+                                        <div class="num" id="num9">9</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="message">
+                <p class="success">Congratulations! Your sudoku is absolutely correct :) &#9989;</p>
+                <p class="fail">Oooops! You might have mistaken somewhere &#10060;.</p>
+                <p class="timeMSG">Your time: 0 seconds.</p>
+                <a href="#" class="reset btn-grad">Play Again</a> <a class="reveal2" href="#solution">Reveal</a>
+            </div>
+            <div id="solution">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="soln-msg">
+                            <p style="font-size: larger;">You tried/played well !</p>
+                            <br>
+                            <p style="font-size: larger;"><strong>Here is the solution:</strong> 👉</p>
+                        </div>
+                        <div class="board">
+                            <div class="col2">
+                                <div class="block">
+                                    <div class="item" id="SOLitem0">0</div>
+                                    <div class="item" id="SOLitem1">0</div>
+                                    <div class="item" id="SOLitem2">0</div>
+                                    <div class="item" id="SOLitem9">0</div>
+                                    <div class="item" id="SOLitem10">0</div>
+                                    <div class="item" id="SOLitem11">0</div>
+                                    <div class="item" id="SOLitem18">0</div>
+                                    <div class="item" id="SOLitem19">0</div>
+                                    <div class="item" id="SOLitem20">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem3">0</div>
+                                    <div class="item" id="SOLitem4">0</div>
+                                    <div class="item" id="SOLitem5">0</div>
+                                    <div class="item" id="SOLitem12">0</div>
+                                    <div class="item" id="SOLitem13">0</div>
+                                    <div class="item" id="SOLitem14">0</div>
+                                    <div class="item" id="SOLitem21">0</div>
+                                    <div class="item" id="SOLitem22">0</div>
+                                    <div class="item" id="SOLitem23">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem6">0</div>
+                                    <div class="item" id="SOLitem7">0</div>
+                                    <div class="item" id="SOLitem8">0</div>
+                                    <div class="item" id="SOLitem15">0</div>
+                                    <div class="item" id="SOLitem16">0</div>
+                                    <div class="item" id="SOLitem17">0</div>
+                                    <div class="item" id="SOLitem24">0</div>
+                                    <div class="item" id="SOLitem25">0</div>
+                                    <div class="item" id="SOLitem26">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem27">0</div>
+                                    <div class="item" id="SOLitem28">0</div>
+                                    <div class="item" id="SOLitem29">0</div>
+                                    <div class="item" id="SOLitem36">0</div>
+                                    <div class="item" id="SOLitem37">0</div>
+                                    <div class="item" id="SOLitem38">0</div>
+                                    <div class="item" id="SOLitem45">0</div>
+                                    <div class="item" id="SOLitem46">0</div>
+                                    <div class="item" id="SOLitem47">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem30">0</div>
+                                    <div class="item" id="SOLitem31">0</div>
+                                    <div class="item" id="SOLitem32">0</div>
+                                    <div class="item" id="SOLitem39">0</div>
+                                    <div class="item" id="SOLitem40">0</div>
+                                    <div class="item" id="SOLitem41">0</div>
+                                    <div class="item" id="SOLitem48">0</div>
+                                    <div class="item" id="SOLitem49">0</div>
+                                    <div class="item" id="SOLitem50">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem33">0</div>
+                                    <div class="item" id="SOLitem34">0</div>
+                                    <div class="item" id="SOLitem35">0</div>
+                                    <div class="item" id="SOLitem42">0</div>
+                                    <div class="item" id="SOLitem43">0</div>
+                                    <div class="item" id="SOLitem44">0</div>
+                                    <div class="item" id="SOLitem51">0</div>
+                                    <div class="item" id="SOLitem52">0</div>
+                                    <div class="item" id="SOLitem53">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem54">0</div>
+                                    <div class="item" id="SOLitem55">0</div>
+                                    <div class="item" id="SOLitem56">0</div>
+                                    <div class="item" id="SOLitem63">0</div>
+                                    <div class="item" id="SOLitem64">0</div>
+                                    <div class="item" id="SOLitem65">0</div>
+                                    <div class="item" id="SOLitem72">0</div>
+                                    <div class="item" id="SOLitem73">0</div>
+                                    <div class="item" id="SOLitem74">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem57">0</div>
+                                    <div class="item" id="SOLitem58">0</div>
+                                    <div class="item" id="SOLitem59">0</div>
+                                    <div class="item" id="SOLitem66">0</div>
+                                    <div class="item" id="SOLitem67">0</div>
+                                    <div class="item" id="SOLitem68">0</div>
+                                    <div class="item" id="SOLitem75">0</div>
+                                    <div class="item" id="SOLitem76">0</div>
+                                    <div class="item" id="SOLitem77">0</div>
+                                </div>
+                                <div class="block">
+                                    <div class="item" id="SOLitem60">0</div>
+                                    <div class="item" id="SOLitem61">0</div>
+                                    <div class="item" id="SOLitem62">0</div>
+                                    <div class="item" id="SOLitem69">0</div>
+                                    <div class="item" id="SOLitem70">0</div>
+                                    <div class="item" id="SOLitem71">0</div>
+                                    <div class="item" id="SOLitem78">0</div>
+                                    <div class="item" id="SOLitem79">0</div>
+                                    <div class="item" id="SOLitem80">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="soln-msg">
+                            <p style="font-size: larger; margin-top: 15px; text-align: center;">Green grids are the mistaken grids (either unfilled or wrongly filled)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="https://www.facebook.com/profile.php?id=100005255746624" target="_blank"> <img class="fb"
+                    src="Image/facebook.png" alt=""></a>
+            <a href="https://github.com/noob-nilarghya" target="_blank"><img class="git" src="Image/github.png"
+                    alt=""></a>
+            <a href="https://www.linkedin.com/in/nilarghya-roy-6a7637201/" target="_blank"><img class="in"
+                    src="Image/linkedin.png" alt=""></a>
+            <p class="copy"> © 2020-24 Shovan Kr. Roy | Jhumpa Roy</p>
+            <p class="love">Made with 💖 by NIL</p>
+        </div>
+    </div>
+
+    <script src="logic.js"></script>
+</body>
+
+</html>
+
+
+<!-- Warm Memories - Emotional Inspiring Piano by Keys of Moon | https://soundcloud.com/keysofmoon
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+Music promoted by https://www.chosic.com/free-music/all/  -->

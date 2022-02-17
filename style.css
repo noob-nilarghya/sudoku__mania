@@ -42,7 +42,14 @@ html {
 .rowSec0{
     text-align: center;
     padding-bottom: 10px;
-    padding-top: 10px;
+}
+.rowSec1{
+    padding-top: 13px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.audioLogo{
+    margin-left: 20px;
 }
 .wAttempt{
     font-weight: bold;
@@ -52,22 +59,29 @@ html {
     margin-left: 30px;
 }
 .time{
-    font-weight: bold;
-    color: red;
     text-align:center;
     display: inline;
     margin-right: 30px;
 }
+.time-light{
+    font-weight: bold;
+    color: red;
+}
+.time-dark{
+    color: yellow;
+    font-weight: 100;
+}
 
-body{
+.BODY{
     height: 100%;
-    background: url("Image/image-from-rawpixel-id-1201179-j.jpg");
+    background: url("Image/bg-light.jpg");
     background-repeat: no-repeat;
     background-position: center;
-    background-size:cover ;
+    background-size: cover ;
     background-attachment: fixed;
     font-family: 'Acme', sans-serif;
 }
+
 
 .problem{
     margin-bottom: 70px;
@@ -76,6 +90,9 @@ body{
     font-size: larger;
     text-align: center;
     margin-bottom: 70px;
+}
+.success, .fail{
+    margin-bottom: 0px;
 }
 #solution{
     margin-bottom: 50px;
@@ -150,7 +167,6 @@ body{
 /* Navbar CSS ends */
 
 .col1{
-    padding-top: 2%;
     font-size: larger;
     text-align: center;
     padding-bottom: 15px;
@@ -162,10 +178,16 @@ body{
     text-decoration:underline;
     text-decoration-color: #28a745;
 }
-.board, .numCanvas{
+.board, .numCanvas, .clearBtn{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.board-light{
+    color: black;
+}
+.board-dark{
+    color: black;
 }
 .block{
     background-color: grey;
@@ -192,7 +214,6 @@ body{
     column-gap: 5px;
 }
 .numMobile{
-    border: 3px solid black;
     padding: 2px;
     margin-top: 20px;
     height: 45px;
@@ -201,6 +222,14 @@ body{
     grid-template-columns: repeat(9, 1fr);
     column-gap: 10px;
     border-radius: 10px;
+}
+.numMobile-light{
+    color: black;
+    border: 3px solid black;
+}
+.numMobile-dark{
+    color: black;
+    border: 3px solid white;
 }
 .item{
     background-color:bisque;
@@ -213,15 +242,16 @@ body{
 }
 .num{
     background-color: greenyellow;
+    border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
     font-weight: bold;
-    border: 2px solid black;
     border-radius: 40%;
     cursor: pointer;
 }
+
 .num:hover{
     box-shadow: 10px 0px 40px 20px white;
 }
@@ -247,7 +277,7 @@ body{
     box-shadow: 10px 0px 40px 20px white;
 }
 .in{
-    border-radius: 50%;
+    margin-bottom: 20px;
     margin-right: 2%;
     opacity: 0.8;
 }
@@ -268,7 +298,13 @@ body{
 .love{
     padding-bottom: 1%;
 }
-.start, .reset, .reveal1, .reveal2, .check{
+.footer-dark{
+    color: white;
+}
+.footer-light{
+    color: black;
+}
+.start, .playAgain1, .PlayAgain0, .reveal1, .reveal2, .check{
     height: 10px;
     width: 20px;
     padding: 5px;
@@ -278,11 +314,24 @@ body{
     margin-left: 5px;
     border-radius: 20%;
 }
-.reset:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
+.clrBtn{
+    height: 30px;
+    width: 45px;
+    padding: 5px;
+    border: 2px solid rgba(0, 0, 0, 0.747);
+    background-color: rgb(239,239,239);
+    color: black;
+    border-radius: 20%;
+    padding-top: 2px;
+    margin-top: 3px;
+}
+.playAgain1:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
+.PlayAgain0:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .check:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .reveal1:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .reveal2:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .start:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
+.clrBtn:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 
 
 .isHidden{
@@ -315,3 +364,129 @@ body{
 }
 .audioON{   }
 .audioOFF{  }
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    box-shadow: 10px 0px 100px 15px white;
+    height: 30px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: red;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 23px;
+    width: 23px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 40px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .dark-mode{
+    display: inline;
+    font-size:larger;
+    margin-right: 8px;
+  }
+  .darkMode-light{
+    color: red;
+  }
+  .blob.red {
+      border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+    animation: pulse-red 2s infinite;
+  }
+  
+  @keyframes pulse-red {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+    }
+    
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+    }
+    
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+    }
+  }
+  .darkMode-dark{
+    color: yellow;
+    font-weight: 100;
+  }
+  .blob.yellow {
+      border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(255, 177, 66, 1);
+    animation: pulse-yellow 2s infinite;
+  }
+  
+  @keyframes pulse-yellow {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 177, 66, 0.7);
+    }
+    
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 177, 66, 0);
+    }
+    
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 177, 66, 0);
+    }
+  }
+  .col-darkMode{
+    text-align: center;
+  }
+  

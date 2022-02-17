@@ -14,6 +14,9 @@
     <link rel="icon" href="Image/favicon2.ico">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/15a51a8672.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
@@ -25,13 +28,12 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script> location.hash = (location.hash) ? location.hash : " "; </script>
 </head>
 
-<body>
+<body class="BODY">
     <div class="container">
         <div class="header">
             <div class="container-fluid">
@@ -69,37 +71,49 @@
                 <div class="row first-row">
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="col1">
-                            
-                            <p>Hello, User;</p>
-                            <p>Before Starting the game, set the difficulty and read the rule.</p>
-                            <p><strong>Difficulty:</strong> Number of UN-FILLED grid: &nbsp;
-                                <input type="number" autocomplete="off" class="unfilled-grid" id="myInput" oninput="myFunction()"> <a href="#GameCanvas" class="start">Start</a></p>
-
-                            <h4 class="rule-heading">RULE</h4>
-                            <p class="rule-Info"> As you can clearly see that the 9x9 sudoku board can be divided into
-                                nine 3x3 region called blocks. Fill in the numbers 1-9 exactly once in every row, column,
-                                and 3x3 region (also called blocks). <br> <br> Abiding the above condition, fill each of
-                                the unfilled grid. Once all the grids are filled, click on <strong>"Check"</strong> to
-                                verify your solution.</p>
-                            <p class="rule-Info"> Get stuck? Click on <strong>"Reveal"</strong> to see the
-                                solution. </p>
-                            <a href="#message" class="check"> Check</a> <a class="reveal1" href="#solution">Reveal</a>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-darkMode">
+                                <p class="dark-mode blob red darkMode-light">Dark Mode</p>
+                                <label class="switch">
+                                    <input type="checkbox" id="dark-mode">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
                         </div>
+                        <div class="row rowSec0">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col1">
+                                    <p>Hello, User;</p>
+                                    <p>Before Starting the game, set the difficulty and read the rule.</p>
+                                    <p><strong>Difficulty:</strong> Number of UN-FILLED grid: &nbsp;
+                                        <input type="number" autocomplete="off" class="unfilled-grid" id="myInput" oninput="myFunction()"> <a href="#GameCanvas" class="start">Start</a></p>
+        
+                                    <h4 class="rule-heading">RULE</h4>
+                                    <p class="rule-Info"> As you can clearly see that the 9x9 sudoku board can be divided into
+                                        nine 3x3 region called blocks. Fill in the numbers 1-9 exactly once in every row, column,
+                                        and 3x3 region (also called blocks). <br> <br> Abiding the above condition, fill each of
+                                        the unfilled grid. Once all the grids are filled, click on <strong>"Check"</strong> to
+                                        verify your solution.</p>
+                                    <p class="rule-Info"> Get stuck? Click on <strong>"Reveal"</strong> to see the solution. </p>
+                                    <p class="rule-Info"> To re-generate new sudoku board click on "<strong>&#10227;</strong>".</p> 
+                                    <a href="#message" class="check"> Check</a> <a class="reveal1" href="#solution">Reveal</a> <a href="" class="PlayAgain0"> <strong>&#10227;</strong> </a>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-12" id="GameCanvas">
-                        <div class="row rowSec0">
+                        <div class="row rowSec1">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <img src="Image/audio_ON.png" class="audioLogo" alt="">
+                                <p class="time time-light">Time Elapsed: 0 Sec</p>
+                                <i class="fas fa-volume-up fa-lg audioLogo"></i>
                                 <br>
-                                <p class="time">Time Elapsed: 0 Sec</p>
-                                <p class="wAttempt">Wrong Attempts: 0</p>
                             </div>
                         </div>
                         <div class="row rowSec1">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="board">
+                                <div class="board board-light">
                                     <div class="col2">
 
                                         <div class="block">
@@ -211,7 +225,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="numCanvas">
 
-                                    <div class="numMobile">
+                                    <div class="numMobile numMobile-light">
                                         <div class="num" id="num1">1</div>
                                         <div class="num" id="num2">2</div>
                                         <div class="num" id="num3">3</div>
@@ -226,6 +240,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row rowSec3">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="clearBtn">
+                                    <a href="#GameCanvas" class="clrBtn">clear</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -234,7 +255,7 @@
                 <p class="success">Congratulations! Your sudoku is absolutely correct :) &#9989;</p>
                 <p class="fail">Oooops! You might have mistaken somewhere &#10060;.</p>
                 <p class="timeMSG">Your time: 0 seconds.</p>
-                <a href="#" class="reset btn-grad">Play Again</a> <a class="reveal2" href="#solution">Reveal</a>
+                <a href="#" class="playAgain1 btn-grad">Play Again</a> <a class="reveal2" href="#solution">Reveal</a>
             </div>
             <div id="solution">
                 <div class="row">
@@ -244,7 +265,7 @@
                             <br>
                             <p style="font-size: larger;"><strong>Here is the solution:</strong> 👉</p>
                         </div>
-                        <div class="board">
+                        <div class="board board-light">
                             <div class="col2">
                                 <div class="block">
                                     <div class="item" id="SOLitem0">0</div>
@@ -356,17 +377,18 @@
         </div>
 
         <div class="footer">
-            <a href="https://www.facebook.com/profile.php?id=100005255746624" target="_blank"> <img class="fb"
-                    src="Image/facebook.png" alt=""></a>
-            <a href="https://github.com/noob-nilarghya" target="_blank"><img class="git" src="Image/github.png"
-                    alt=""></a>
-            <a href="https://www.linkedin.com/in/nilarghya-roy-6a7637201/" target="_blank"><img class="in"
-                    src="Image/linkedin.png" alt=""></a>
-            <p class="copy"> © 2020-24 Shovan Kr. Roy | Jhumpa Roy</p>
-            <p class="love">Made with 💖 by NIL</p>
+            <a href="https://www.facebook.com/profile.php?id=100005255746624" target="_blank"> <i class="fab fa-facebook fb footer-light fa-2x"></i>
+            <a href="https://www.linkedin.com/in/nilarghya-roy-6a7637201/" target="_blank"><img class="in footer-light" src="Image/linkedin.png" alt=""></a>
+            <a href="https://github.com/noob-nilarghya" target="_blank"><i class="fab fa-github git footer-light fa-2x"></i> </a>
+            
+            <div class="footerText">
+                <p class="copy footer-light"> © 2020-24 Shovan Kr. Roy | Jhumpa Roy</p>
+                <p class="love footer-light">Made with 💖 by NIL</p>
+            </div>
+            
         </div>
     </div>
-
+    <script src="confetti.js"></script>
     <script src="logic.js"></script>
 </body>
 
@@ -377,3 +399,16 @@
 Attribution 4.0 International (CC BY 4.0)
 https://creativecommons.org/licenses/by/4.0/
 Music promoted by https://www.chosic.com/free-music/all/  -->
+
+
+
+
+
+
+
+
+<div class="hamburger hamburger--emphatic js-hamburger">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </div>

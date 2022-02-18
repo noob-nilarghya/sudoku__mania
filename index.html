@@ -85,8 +85,18 @@
                                 <div class="col1">
                                     <p>Hello, User;</p>
                                     <p>Before Starting the game, set the difficulty and read the rule.</p>
-                                    <p><strong>Difficulty:</strong> Number of UN-FILLED grid: &nbsp;
-                                        <input type="number" autocomplete="off" class="unfilled-grid" id="myInput" oninput="myFunction()"> <a href="#GameCanvas" class="start">Start</a></p>
+                                    <!-- <p><strong>Difficulty:</strong> Number of UN-FILLED grid: &nbsp;
+                                        <input type="number" autocomplete="off" class="unfilled-grid" id="myInput" oninput="myFunction()"> <a href="#GameCanvas" class="start">Start</a></p> -->
+                                    <div class="startGame">
+                                        <p><strong style="padding-right: 8px;">Difficulty:</strong>
+                                        <select class="unfilled-grid">
+                                            <option value="easy" selected>Easy</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="hard">Hard</option>
+                                            <option value="expert">Expert</option>
+                                        </select>
+                                        <a href="#GameCanvas" class="start">Start</a></p>
+                                    </div>
         
                                     <h4 class="rule-heading">RULE</h4>
                                     <p class="rule-Info"> As you can clearly see that the 9x9 sudoku board can be divided into
@@ -96,7 +106,7 @@
                                         verify your solution.</p>
                                     <p class="rule-Info"> Get stuck? Click on <strong>"Reveal"</strong> to see the solution. </p>
                                     <p class="rule-Info"> To re-generate new sudoku board click on "<strong>&#10227;</strong>".</p> 
-                                    <a href="#message" class="check"> Check</a> <a class="reveal1" href="#solution">Reveal</a> <a href="" class="PlayAgain0"> <strong>&#10227;</strong> </a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -235,16 +245,15 @@
                                         <div class="num" id="num7">7</div>
                                         <div class="num" id="num8">8</div>
                                         <div class="num" id="num9">9</div>
+                                        <div class="num clrBtn" id="num9">clear</div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                        <div class="row rowSec3">
+                        
+                        <div class="row rowSec1">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="clearBtn">
-                                    <a href="#GameCanvas" class="clrBtn">clear</a>
-                                </div>
+                                <a href="#message" class="check"> Check</a> <a class="reveal1" href="#solution">Reveal</a> <a href="" class="PlayAgain0"> <i class="fas fa-redo"></i> </a>
                             </div>
                         </div>
                     </div>
@@ -388,7 +397,6 @@
             
         </div>
     </div>
-    <script src="confetti.js"></script>
     <script src="logic.js"></script>
 </body>
 
@@ -399,16 +407,3 @@
 Attribution 4.0 International (CC BY 4.0)
 https://creativecommons.org/licenses/by/4.0/
 Music promoted by https://www.chosic.com/free-music/all/  -->
-
-
-
-
-
-
-
-
-<div class="hamburger hamburger--emphatic js-hamburger">
-    <div class="hamburger-box">
-      <div class="hamburger-inner"></div>
-    </div>
-  </div>

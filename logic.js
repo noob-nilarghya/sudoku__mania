@@ -54,6 +54,8 @@ const Linkedin= document.querySelector(".in");
 const git= document.querySelector(".git");
 const copy= document.querySelector(".copy");
 const love= document.querySelector(".love");
+const selectDifficulty = document.querySelector(".unfilled-grid");
+const startGame= document.querySelector(".startGame");
 
 const BOARD= document.querySelectorAll(".board");
 var hasBegin= false;
@@ -85,15 +87,23 @@ window.onload = () => {
     reveal2.classList.add("isHidden");
     sol.classList.add("isHidden");
 };
-var inputVal=0;
-function myFunction() {
-    var x = document.getElementById("myInput").value;
-    let temp=parseInt(x,10);
-    if(temp>=1 && temp<=80){
-        inputVal=temp;
+var inputVal=42;
+selectDifficulty.addEventListener("click", function(){
+    if(selectDifficulty.options[selectDifficulty.selectedIndex].value=='easy'){
+        inputVal=42;
     }
+    if(selectDifficulty.options[selectDifficulty.selectedIndex].value=='medium'){
+        inputVal=48;
+    }
+    if(selectDifficulty.options[selectDifficulty.selectedIndex].value=='hard'){
+        inputVal=53;
+    }
+    if(selectDifficulty.options[selectDifficulty.selectedIndex].value=='expert'){
+        inputVal=56;
+    }
+});
 
-}
+
 var timer=0;
 var myInterval;
 var checked=false;
@@ -112,6 +122,7 @@ start.addEventListener("click", function(){
             audioBtn.classList.add("audioON");
         }
         sudokuGenerator(inputVal);
+        startGame.classList.add("isHidden");
         let cnt=0;
         for(let i=0; i<9; i++){
             for(let j=0; j<9; j++){

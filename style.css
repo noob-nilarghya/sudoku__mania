@@ -308,10 +308,10 @@ html {
 .footer-light{
     color: black;
 }
-.start, .playAgain1, .PlayAgain0, .reveal1, .reveal2, .check{
+.start, .playAgain1, .PlayAgain0, .PlayAgain3, .reveal1, .reveal2, .check{
     font-size: large;
-    height: 10px;
-    width: 20px;
+    height: 41px;
+    width: 91px;
     padding: 5px;
     border: 2px solid rgba(0, 0, 0, 0.747);
     background-color: rgb(239,239,239);
@@ -331,6 +331,7 @@ html {
 }
 .playAgain1:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .PlayAgain0:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
+.PlayAgain3:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .check:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .reveal1:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
 .reveal2:hover{ color: black; background-color: greenyellow; text-decoration: none; box-shadow: 10px 0px 40px 20px white; }
@@ -348,6 +349,7 @@ html {
     /* background-color:#0ff;  */
     background-color:greenyellow; 
     animation: iconAnime 1.5s linear infinite alternate;
+    border-radius: 15%;
 }
 @keyframes iconAnime {
     from{

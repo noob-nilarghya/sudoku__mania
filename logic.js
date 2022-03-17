@@ -36,6 +36,7 @@ const reveal1= document.querySelector(".reveal1");
 const reveal2= document.querySelector(".reveal2");
 const playAgain= document.querySelector(".playAgain1");
 const playAgain0= document.querySelector(".PlayAgain0");
+const playAgain3= document.querySelector(".PlayAgain3");
 const success= document.querySelector(".success");
 const fail= document.querySelector(".fail");
 const sol= document.querySelector("#solution");
@@ -154,7 +155,6 @@ start.addEventListener("click", function(){
 
 darkMode.addEventListener("click", function(){
     if(darkMode.checked==true){ // DARK MODE
-        console.log("here");
         BODY.style.backgroundImage= "url('Image/bg-dark.png')";
         BODY.style.color= "#c7bebe";
         BODY.style.fontWeight="100";
@@ -278,6 +278,15 @@ playAgain.addEventListener("click", function(){
 });
 
 playAgain0.addEventListener("click", function(){
+    history.scrollRestoration = "manual";
+    document.querySelector('html').style.scrollBehavior = '';
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+    }
+    location.reload();
+});
+
+playAgain3.addEventListener("click", function(){
     history.scrollRestoration = "manual";
     document.querySelector('html').style.scrollBehavior = '';
     window.onbeforeunload = function () {

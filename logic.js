@@ -88,7 +88,7 @@ window.onload = () => {
     reveal2.classList.add("isHidden");
     sol.classList.add("isHidden");
 };
-var inputVal=42;
+var inputVal=42; // default
 selectDifficulty.addEventListener("click", function(){
     if(selectDifficulty.options[selectDifficulty.selectedIndex].value=='easy'){
         inputVal=42;
@@ -106,7 +106,7 @@ selectDifficulty.addEventListener("click", function(){
 
 
 var timer=0;
-var myInterval;
+var myInterval; // setInterval variable to update timer
 var checked=false;
 var revealed1=false;
 var revealed2=false;
@@ -267,36 +267,23 @@ audioBtn.addEventListener("click", function(){
     }
 });
 
-
-playAgain.addEventListener("click", function(){
+const reloadWindow= function(){
     history.scrollRestoration = "manual";
     document.querySelector('html').style.scrollBehavior = '';
     window.onbeforeunload = function () {
         window.scrollTo(0, 0);
     }
     location.reload();
-});
+}
 
-playAgain0.addEventListener("click", function(){
-    history.scrollRestoration = "manual";
-    document.querySelector('html').style.scrollBehavior = '';
-    window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-    }
-    location.reload();
-});
+playAgain.addEventListener("click", reloadWindow);
 
-playAgain3.addEventListener("click", function(){
-    history.scrollRestoration = "manual";
-    document.querySelector('html').style.scrollBehavior = '';
-    window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-    }
-    location.reload();
-});
+playAgain0.addEventListener("click", reloadWindow);
+
+playAgain3.addEventListener("click", reloadWindow);
 
 
-/******************************************************   CONFETTI   ******************************************************************************************************/
+/****************************************   CONFETTI   **********************************************/
 var confetti = {
 	maxCount: 150,		//set max confetti count
 	speed: 2,			//set the particle animation speed
@@ -510,7 +497,7 @@ var confetti = {
 		}
 	}
 })();
-/***************************************************************************************************************************************************************************/
+/*************************************************************************************************************************************************************/
 
 
 
@@ -523,7 +510,7 @@ check.addEventListener("click", function(){
     // }
 
     checked=true;
-    clearInterval(myInterval);
+    clearInterval(myInterval); // stop timer
     let ans= checkUserSolution();
     timeMSG.textContent="Your time: "+timer+" seconds.";
     if(ans===true){
@@ -590,23 +577,53 @@ function gridToC(gridVal){
 const Grid= [];
 var idx=0;
 
+/*
+👉 If any of the item is clicked? --> 
+    Check wheather currently other item are animating? If yes, remove animation
+    Decode correponding 0-based row, col index from item Number
+    Check that wheather user clicked on empty grid or not? If yes, apply animation
+    Check wheather user clicked on clrBtn or not? If yes, remove animation from current grid, & revert grid value back to 0
+    Now check that wheather user clicked on any of the numPad btn or not? If yes -->
+        Check wheather current animated grid is unfilled or not? If yes -->First remove animation & then assign numPad value to grid
+        Now check wheather current value is permitted or not? IF yes --> Turn text color to WebGL2RenderingContext, If not permitted --> Turn text color to red
+*/
+
+const numPad= function(Itm, z){
+    if(wePutted[gridToR(Grid[idx-1])][gridToC(Grid[idx-1])]===0){
+        Itm.classList.remove("selectAnime");
+        let NuMI=z;
+        
+        document.querySelector("#item"+Grid[idx-1]).textContent=NuMI.toString(10);
+        board[gridToR(Grid[idx-1])][gridToC(Grid[idx-1])]=NuMI;
+
+        if(isPermittedCheck(NuMI, gridToR(Grid[idx-1]),gridToC(Grid[idx-1]))==true){ // correct value has ben choosen by user
+            document.querySelector("#item"+Grid[idx-1]).classList.remove("txtRed");
+            document.querySelector("#item"+Grid[idx-1]).classList.add("txtGreen");
+        }
+        else{
+            document.querySelector("#item"+Grid[idx-1]).classList.remove("txtGreen"); // wrong value
+            document.querySelector("#item"+Grid[idx-1]).classList.add("txtRed");
+        }
+    }
+}
+
 for(let i=0; i<81; i++){
     let Itm= document.querySelector("#item"+i);
     Itm.addEventListener("click", function(){
         if(checked===false && revealed1===false && revealed2===false){
-            Grid[idx]=i;
+            Grid.push(i);
             idx++;
             
-            for(let k=0; k<81; k++){
+            for(let k=0; k<81; k++){ 
                 if(document.querySelector("#item"+k).classList.contains("selectAnime")===true){
-                    document.querySelector("#item"+k).classList.remove("selectAnime");
+                    document.querySelector("#item"+k).classList.remove("selectAnime"); // remove animation from other grid
                 }
             }
             
             let r= gridToR(Grid[idx-1]); 
             let c= gridToC(Grid[idx-1]);
             
-            if(wePutted[r][c]===0){
+            if(wePutted[r][c]===0){ // grid was unfilled (user has clicked on correct grid) --> apply animation
                 Itm.classList.add("selectAnime");
             }
             
@@ -617,30 +634,16 @@ for(let i=0; i<81; i++){
                 }
             });
             
-            let countI=0;
-            for(let z=1; z<=9; z++){
-                document.querySelector("#num"+z).addEventListener("click", function(){
-                    if(wePutted[gridToR(Grid[idx-1])][gridToC(Grid[idx-1])]===0){
-                        if(countI<1){
-                            Itm.classList.remove("selectAnime");
-                            let NuMI=z;
-                            countI++;
-                            
-                            document.querySelector("#item"+Grid[idx-1]).textContent=NuMI.toString(10);
-                            board[gridToR(Grid[idx-1])][gridToC(Grid[idx-1])]=NuMI;
+            document.querySelector("#num"+1).addEventListener("click", function(){  numPad(Itm, 1)  });
+            document.querySelector("#num"+2).addEventListener("click", function(){  numPad(Itm, 2)  });
+            document.querySelector("#num"+3).addEventListener("click", function(){  numPad(Itm, 3)  });
+            document.querySelector("#num"+4).addEventListener("click", function(){  numPad(Itm, 4)  });
+            document.querySelector("#num"+5).addEventListener("click", function(){  numPad(Itm, 5)  });
+            document.querySelector("#num"+6).addEventListener("click", function(){  numPad(Itm, 6)  });
+            document.querySelector("#num"+7).addEventListener("click", function(){  numPad(Itm, 7)  });
+            document.querySelector("#num"+8).addEventListener("click", function(){  numPad(Itm, 8)  });
+            document.querySelector("#num"+9).addEventListener("click", function(){  numPad(Itm, 9)  });
 
-                            if(isPermittedCheck(NuMI, gridToR(Grid[idx-1]),gridToC(Grid[idx-1]))==true){
-                                document.querySelector("#item"+Grid[idx-1]).classList.remove("txtRed");
-                                document.querySelector("#item"+Grid[idx-1]).classList.add("txtGreen");
-                            }
-                            else{
-                                document.querySelector("#item"+Grid[idx-1]).classList.remove("txtGreen");
-                                document.querySelector("#item"+Grid[idx-1]).classList.add("txtRed");
-                            }
-                        }
-                    }
-                });
-            }
         }
     });
 }
@@ -692,9 +695,9 @@ reveal2.addEventListener("click", function(){
 });
 
 
-var board= new Array(9);
-var solution= new Array(9);
-var wePutted= new Array(9)
+var board= new Array(9); // board with which user will interact
+var solution= new Array(9); // board which contains the actual solution
+var wePutted= new Array(9) // kind of isVisited check (to keep a tract on which grid, we have removed our value)
 
 for(let i=0; i<board.length; i++){
     board[i]= new Array(9);

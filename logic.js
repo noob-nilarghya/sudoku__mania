@@ -29,26 +29,25 @@ setTimeout(function(){
 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 document.body.scrollTop = 0; // For Safari
 
-const Input= document.getElementById("myInput");
-const start= document.querySelector(".start");
-const check= document.querySelector(".check");
-const reveal1= document.querySelector(".reveal1");
-const reveal2= document.querySelector(".reveal2");
-const playAgain= document.querySelector(".playAgain1");
-const playAgain0= document.querySelector(".PlayAgain0");
-const playAgain3= document.querySelector(".PlayAgain3");
-const success= document.querySelector(".success");
-const fail= document.querySelector(".fail");
-const sol= document.querySelector("#solution");
-const msg= document.querySelector("#message");
-const time= document.querySelector(".time");
-const timeMSG= document.querySelector(".timeMSG");
-const audioBtn= document.querySelector(".audioLogo");
-const clrBtn= document.querySelector(".clrBtn");
-const BODY= document.querySelector(".BODY");
+const start= document.querySelector(".start"); // start btn
+const check= document.querySelector(".check"); // check btn
+const reveal1= document.querySelector(".reveal1"); // upper reveal btn
+const reveal2= document.querySelector(".reveal2"); // lower reveal btn
+const playAgain= document.querySelector(".playAgain1"); // mid playAgain btn
+const playAgain0= document.querySelector(".PlayAgain0"); // ⟳ btn
+const playAgain3= document.querySelector(".PlayAgain3"); // last playAgain btn
+const success= document.querySelector(".success"); // success msg
+const fail= document.querySelector(".fail"); // failure msg
+const sol= document.querySelector("#solution"); // soln container
+const msg= document.querySelector("#message"); // verdict msg
+const time= document.querySelector(".time"); // timer
+const timeMSG= document.querySelector(".timeMSG"); // timer verdict
+const audioBtn= document.querySelector(".audioLogo"); // audio btn
+const clrBtn= document.querySelector(".clrBtn"); // clr btn
+const BODY= document.querySelector(".BODY"); 
 const navBar= document.querySelector(".navigationBar");
-const numMobile= document.querySelector(".numMobile");
-const darkMode= document.querySelector("#dark-mode");
+const numMobile= document.querySelector(".numMobile"); // 1-9
+const darkMode= document.querySelector("#dark-mode"); // dark mode toggle btn
 const darkModePara= document.querySelector(".dark-mode");
 const fb= document.querySelector(".fb");
 const Linkedin= document.querySelector(".in");
@@ -56,11 +55,11 @@ const git= document.querySelector(".git");
 const copy= document.querySelector(".copy");
 const love= document.querySelector(".love");
 const selectDifficulty = document.querySelector(".unfilled-grid");
-const startGame= document.querySelector(".startGame");
+const startGame= document.querySelector(".startGame"); 
 
 const BOARD= document.querySelectorAll(".board");
-var hasBegin= false;
 
+// Howlwer JS
 var music = {
     overworld: new Howl({
         src: [
@@ -88,6 +87,8 @@ window.onload = () => {
     reveal2.classList.add("isHidden");
     sol.classList.add("isHidden");
 };
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 var inputVal=42; // default
 selectDifficulty.addEventListener("click", function(){
     if(selectDifficulty.options[selectDifficulty.selectedIndex].value=='easy'){
@@ -105,11 +106,22 @@ selectDifficulty.addEventListener("click", function(){
 });
 
 
+var hasBegin= false;
 var timer=0;
 var myInterval; // setInterval variable to update timer
 var checked=false;
 var revealed1=false;
 var revealed2=false;
+
+var board= new Array(9); // board with which user will interact
+var solution= new Array(9); // board which contains the actual solution
+var wePutted= new Array(9) // kind of isVisited check (to keep a tract on which grid, we have removed our value)
+
+for(let i=0; i<board.length; i++){
+    board[i]= new Array(9);
+    solution[i]= new Array(9);
+    wePutted[i]= new Array(9);
+}
 
 start.addEventListener("click", function(){
     
@@ -284,6 +296,7 @@ playAgain3.addEventListener("click", reloadWindow);
 
 
 /****************************************   CONFETTI   **********************************************/
+{
 var confetti = {
 	maxCount: 150,		//set max confetti count
 	speed: 2,			//set the particle animation speed
@@ -497,6 +510,7 @@ var confetti = {
 		}
 	}
 })();
+}
 /*************************************************************************************************************************************************************/
 
 
@@ -585,7 +599,7 @@ var idx=0;
     Check wheather user clicked on clrBtn or not? If yes, remove animation from current grid, & revert grid value back to 0
     Now check that wheather user clicked on any of the numPad btn or not? If yes -->
         Check wheather current animated grid is unfilled or not? If yes -->First remove animation & then assign numPad value to grid
-        Now check wheather current value is permitted or not? IF yes --> Turn text color to WebGL2RenderingContext, If not permitted --> Turn text color to red
+        Now check wheather current value is permitted or not? IF yes --> Turn text color to green, If not permitted --> Turn text color to red
 */
 
 const numPad= function(Itm, z){
@@ -694,16 +708,6 @@ reveal2.addEventListener("click", function(){
     
 });
 
-
-var board= new Array(9); // board with which user will interact
-var solution= new Array(9); // board which contains the actual solution
-var wePutted= new Array(9) // kind of isVisited check (to keep a tract on which grid, we have removed our value)
-
-for(let i=0; i<board.length; i++){
-    board[i]= new Array(9);
-    solution[i]= new Array(9);
-    wePutted[i]= new Array(9);
-}
 
 function randomNumGen(){
     let num= Math.random();
@@ -823,7 +827,6 @@ function resetBoard(){
         for(let j=0; j<9; j++){
             board[i][j]=0;
             wePutted[i][j]=0;
-            
         }
     }
 }
@@ -841,7 +844,7 @@ function createFullSudoku(){
                     let num= randomNumGen();
                     
                     if(m.has(num)===false){
-                        m.set(num, 1);
+                        m.set(num, true);
                         count++;
 
                         if(isPermitted(num, i, j)===true){ 
@@ -876,7 +879,7 @@ function removeGrid(numOfGridRemove){
         if(m.has(s) === false){
             board[row-1][col-1]=0;
             wePutted[row-1][col-1]=0;
-            m.set(s,1);
+            m.set(s,true);
             count++;
         }
     }

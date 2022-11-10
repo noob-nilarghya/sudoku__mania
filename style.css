@@ -335,7 +335,7 @@ html {
 
 
 .isHidden{
-    visibility: hidden;
+    display: none;
 }
 .unfilled{
     background-color: aliceblue;
